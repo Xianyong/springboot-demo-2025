@@ -14,24 +14,13 @@
         <module name="demo-devenv" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="core" target="1.8" />
-      <module name="demo-denenv" target="21" />
-      <module name="demo-envdev" target="23" />
-      <module name="devenv" target="21" />
-      <module name="untitled" target="21" />
-    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="core" options="-parameters" />
       <module name="demo-collection" options="" />
       <module name="demo-core" options="-parameters" />
-      <module name="demo-denenv" options="-parameters" />
       <module name="demo-devenv" options="-parameters" />
-      <module name="devenv" options="-parameters" />
       <module name="parent" options="" />
-      <module name="untitled" options="-parameters" />
       <module name="web-api" options="-parameters" />
     </option>
   </component>

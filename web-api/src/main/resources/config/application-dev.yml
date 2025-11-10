@@ -1,0 +1,26 @@
+#======================================#
+#========== Server settings ===========#
+#======================================#
+
+server:
+
+  port: 8080
+  servlet:
+    context-path: /js
+    register-default-servlet: false
+  #    encoding.enabled: true
+  tomcat:
+    uri-encoding: UTF-8
+    # 表单请求数据的最大大小
+    max-http-form-post-size: 20MB
+    #    # 进程的最大连接数
+    #    max-connections: 8192
+    #    # 连接数满后的排队个数
+    #    accept-count: 100
+    #    # 线程数最大和最小个数
+    #    threads:
+    #      max: 200
+    #      min-spare: 10
+
+  # 当 Nginx 为 https，tomcat 为 http 时，设置该选项为 true
+  schemeHttps: false

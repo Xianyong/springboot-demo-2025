@@ -1,0 +1,8 @@
+# 默认激活开发环境，方便本地启动
+spring:
+  profiles:
+    active: dev
+
+# 公共配置
+  application:
+    name: demo-springboot-app
