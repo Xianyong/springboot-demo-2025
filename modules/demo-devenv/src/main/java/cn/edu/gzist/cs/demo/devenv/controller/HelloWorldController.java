@@ -2,12 +2,15 @@ package cn.edu.gzist.cs.demo.devenv.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloWorldController {
-    @GetMapping(value = "/hello")
+//    @GetMapping(value = "/hello")
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public String SayHi(){
-        return "Hi, the world.";
+        return "Hi, the new world.";
     }
 }

@@ -20,7 +20,7 @@
       <module name="demo-collection" options="" />
       <module name="demo-core" options="-parameters" />
       <module name="demo-devenv" options="-parameters" />
-      <module name="parent" options="" />
+      <module name="parent" options="-parameters" />
       <module name="web-api" options="-parameters" />
     </option>
   </component>
