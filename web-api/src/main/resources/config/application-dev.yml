@@ -24,3 +24,17 @@ server:
 
   # 当 Nginx 为 https，tomcat 为 http 时，设置该选项为 true
   schemeHttps: false
+
+spring:
+  # 数据库连接
+  datasource:
+    url: jdbc:mysql://localhost:3306/jeesite?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    username: root
+    password: qazxsw
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  mapper-locations: classpath*:/mapper/**/*.xml
+#  type-aliases-package: cn.edu.gzist.cs.demo.devenv.entity

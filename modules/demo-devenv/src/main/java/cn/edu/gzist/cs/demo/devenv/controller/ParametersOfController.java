@@ -5,22 +5,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-
-import cn.edu.gzist.cs.demo.entity.User;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.Map;
+import cn.edu.gzist.cs.demo.entity.UserTest;
 
 @RestController
 @RequestMapping("/parameters")
 public class ParametersOfController {
 
     // 1. 请求参数接收 (@RequestParam)
-    // 访问方式: http://localhost:8080/parameters/request?page=1&size=10&keyword=测试
+    // 访问方式: http://localhost:8080/js/parameters/request?page=1&size=10&keyword=测试
     @GetMapping("/request")
     public String getRequestParameters(
-            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "100") int page,
             @RequestParam(required = false) Integer size,
             @RequestParam("keyword") String searchKeyword) {
         return String.format("请求参数 - 页码: %d, 每页大小: %s, 关键词: %s",
@@ -29,10 +24,11 @@ public class ParametersOfController {
 
     // 2. 请求头参数接收 (@RequestHeader)
     // 访问方式: 带Header信息的GET请求
+    //
     // Header: Token: abc123, User-Agent: Mozilla/5.0
     @GetMapping("/header")
     public String getHeaderParameters(
-            @RequestHeader("Token") String token,
+            @RequestHeader(value = "Token", required = true) String token,
             @RequestHeader("User-Agent") String userAgent) {
         return String.format("请求头参数 - Token: %s, 浏览器信息: %s", token, userAgent);
     }
@@ -51,8 +47,15 @@ public class ParametersOfController {
     // 访问方式: POST请求，Content-Type: application/x-www-form-urlencoded
     // 表单字段: id=2&username=formUser&age=25
     @PostMapping("/form")
-    public String getFormParameters(User user) {
+    public String getFormParameters(UserTest user) {
         return String.format("表单参数 - 用户信息: ID=%d, 用户名=%s, 年龄=%d",
+                user.getId(), user.getUsername(), user.getAge());
+    }
+
+    // 当请求到达时，Spring Boot会自动将JSON映射到User类的属性上（要求属性名与JSON键名一致）
+    @PostMapping("/formbody")
+    public String getRequestBodyParameters(@RequestBody UserTest user) {
+        return String.format("表单JSON参数 - 用户信息: ID=%d, 用户名=%s, 年龄=%d",
                 user.getId(), user.getUsername(), user.getAge());
     }
 
@@ -67,7 +70,7 @@ public class ParametersOfController {
     }
 
     // 6. 路径参数接收 (@PathVariable)
-    // 访问方式: http://localhost:8080/parameters/path/1001/张三
+    // 访问方式: http://localhost:8080/js/parameters/path/1001/zhagnsan
     @GetMapping("/path/{id}/{name}")
     public String getPathParameters(
             @PathVariable("id") Long userId,

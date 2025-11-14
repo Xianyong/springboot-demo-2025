@@ -19,16 +19,20 @@
 
     <properties>
         <java.version>23</java.version>
+        <spring-boot.version>2.5.6</spring-boot.version><!--由于Swagger兼容问题，将版本从2.6.13降至了2.5.6-->
     </properties>
 
     <build>
-
         <plugins>
-
             <!-- compiler插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
             <!-- jar插件 -->
@@ -48,13 +52,10 @@
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
             </plugin>
-
         </plugins>
 
         <pluginManagement>
-
             <plugins>
-
                 <!-- compiler插件，设定JDK版本 -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -63,6 +64,25 @@
                     <configuration>
                         <parameters>true</parameters>
                         <showWarnings>true</showWarnings>
+                    </configuration>
+                </plugin>
+
+                <!-- springboot插件 -->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <executions>
+                        <execution>
+                            <id>repackage</id>
+                            <goals>
+                                <goal>repackage</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <!--suppress UnresolvedMavenProperty -->
+                        <mainClass>${start-class}</mainClass>
+                        <skip>true</skip>
                     </configuration>
                 </plugin>
 
@@ -171,24 +191,6 @@
                     <!--<version>3.1.0</version>-->
                 </plugin>
 
-                <!-- springboot插件 -->
-                <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>repackage</id>
-                            <goals>
-                                <goal>repackage</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <!--suppress UnresolvedMavenProperty -->
-                        <mainClass>${start-class}</mainClass>
-                    </configuration>
-                </plugin>
-
                 <!-- Java Document Generate -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -204,37 +206,6 @@
                             </configuration> -->
                         </execution>
                     </executions>
-                </plugin>
-
-                <!-- JavaScript CSS Compress -->
-                <plugin>
-                    <groupId>com.jeesite.maven</groupId>
-                    <artifactId>compressor-maven-plugin</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
-                    <executions>
-                        <execution>
-                            <phase>prepare-package</phase>
-                            <goals>
-                                <goal>compress</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <configuration>
-                        <encoding>UTF-8</encoding>
-                        <jswarn>false</jswarn>
-                        <nosuffix>true</nosuffix>
-                        <linebreakpos>30000</linebreakpos>
-                        <force>true</force>
-                        <includes>
-                            <include>**/*.js</include>
-                            <include>**/*.css</include>
-                        </includes>
-                        <excludes>
-                            <exclude>**/WEB-INF/classes/**</exclude>
-                            <exclude>**/*.min.js</exclude>
-                            <exclude>**/*.min.css</exclude>
-                        </excludes>
-                    </configuration>
                 </plugin>
 
                 <!-- Eclipse m2e settings only -->
@@ -307,10 +278,10 @@
             <releases><enabled>true</enabled></releases>
             <snapshots><enabled>false</enabled></snapshots>
         </repository>
-        <repository>
-            <id>jeesite-repos</id>
-            <url>https://maven.jeesite.net/repository/maven-public</url>
-        </repository>
+<!--        <repository>-->
+<!--            <id>jeesite-repos</id>-->
+<!--            <url>https://maven.jeesite.net/repository/maven-public</url>-->
+<!--        </repository>-->
     </repositories>
     <pluginRepositories>
         <pluginRepository>
@@ -319,9 +290,9 @@
             <releases><enabled>true</enabled></releases>
             <snapshots><enabled>false</enabled></snapshots>
         </pluginRepository>
-        <pluginRepository>
-            <id>jeesite-repos</id>
-            <url>https://maven.jeesite.net/repository/maven-public</url>
-        </pluginRepository>
+<!--        <pluginRepository>-->
+<!--            <id>jeesite-repos</id>-->
+<!--            <url>https://maven.jeesite.net/repository/maven-public</url>-->
+<!--        </pluginRepository>-->
     </pluginRepositories>
 </project>

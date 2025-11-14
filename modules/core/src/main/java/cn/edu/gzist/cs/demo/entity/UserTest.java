@@ -1,12 +1,12 @@
 package cn.edu.gzist.cs.demo.entity;
 
-public class User {
+public class UserTest {
     private Long id;
     private String username;
     private int age;
 
     // 必须要有无参构造函数
-    public User() {}
+    public UserTest() {}
 
     // getter和setter方法
     public Long getId() { return id; }

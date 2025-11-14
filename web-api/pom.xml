@@ -17,11 +17,6 @@
     <dependencies>
         <dependency>
             <groupId>cn.edu.gzist.cs.demo</groupId>
-            <artifactId>demo-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.edu.gzist.cs.demo</groupId>
             <artifactId>demo-devenv</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
