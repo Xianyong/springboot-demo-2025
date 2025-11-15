@@ -25,6 +25,8 @@ public class Goods {
     @TableField(exist = false)
     private List<Order> orders;
 
+    @TableField(exist = false)
+    private int orderCount;
     // 构造方法
     public Goods() {}
 
@@ -82,6 +84,14 @@ public class Goods {
 
     public void setOrders(List<Order> orders) {
         this.orders = orders;
+    }
+
+    public int getOrderCount() {
+        return orderCount;
+    }
+
+    public void setOrderCount(int orderCount) {
+        this.orderCount = orderCount;
     }
 
     @Override

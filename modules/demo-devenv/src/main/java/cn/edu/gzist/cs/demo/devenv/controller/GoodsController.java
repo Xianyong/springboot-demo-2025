@@ -1,7 +1,9 @@
 package cn.edu.gzist.cs.demo.devenv.controller;
 
 import cn.edu.gzist.cs.demo.devenv.entity.Goods;
+import cn.edu.gzist.cs.demo.devenv.entity.Order;
 import cn.edu.gzist.cs.demo.devenv.mapper.GoodsMapper;
+import cn.edu.gzist.cs.demo.devenv.mapper.OrderMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class GoodsController {
 
     @Autowired
     private GoodsMapper goodsMapper;
+
+    @Autowired
+    private OrderMapper orderMapper;
 
     // 创建商品
     @PostMapping
@@ -60,12 +65,55 @@ public class GoodsController {
         return result;
     }
 
+    // 根据ID, 查询订单
+    @GetMapping("/{id}/orders")
+    public Map<String, Object> getOrdersById(@PathVariable String id) {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            Goods goods = goodsMapper.selectById(id);
+            if (goods != null && goods.getId() != null) {
+                List<Order> orders = orderMapper.selectByGid(goods.getId());
+                if(orders != null){
+                    result.put("success", true);
+                    result.put("data", orders);
+                }
+                else{
+                    result.put("success", false);
+                    result.put("message", "订单不存在");
+                }
+            } else {
+                result.put("success", false);
+                result.put("message", "商品不存在");
+            }
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "查询订单时发生错误: " + e.getMessage());
+        }
+        return result;
+    }
+
     // 查询所有商品
     @GetMapping
     public Map<String, Object> getAllGoods() {
         Map<String, Object> result = new HashMap<>();
         try {
             List<Goods> goodsList = goodsMapper.selectList(null);
+            result.put("success", true);
+            result.put("data", goodsList);
+            result.put("total", goodsList.size());
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "查询商品列表时发生错误: " + e.getMessage());
+        }
+        return result;
+    }
+
+    // 查询所有商品
+    @GetMapping(value = "/countorders")
+    public Map<String, Object> getAllGoodsWithStatistics() {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            List<Goods> goodsList = goodsMapper.selectGoodsWithOrderCount();
             result.put("success", true);
             result.put("data", goodsList);
             result.put("total", goodsList.size());
