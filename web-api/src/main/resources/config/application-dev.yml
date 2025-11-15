@@ -28,7 +28,7 @@ server:
 spring:
   # 数据库连接
   datasource:
-    url: jdbc:mysql://localhost:3306/jeesite?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
+    url: jdbc:mysql://localhost:3306/xiaopang?useSSL=false&serverTimezone=UTC&characterEncoding=utf8
     username: root
     password: qazxsw
     driver-class-name: com.mysql.cj.jdbc.Driver

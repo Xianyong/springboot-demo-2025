@@ -19,11 +19,11 @@ public interface UserMapper extends BaseMapper<User> {
 
     //  查询用户，根据用户id查询信息
     @Select("select * from t_user where id = #{id}")
-    User selectById(int id);
+    User selectById(String id);
 
     //  查询用户及其所有的订单
     @Select("select * from t_user")
-    /*如果用了@Results这个注解，那么所有的字段都要自己手动完成字段到类属性名的映射，即使名称一致*/
+    /*如果用了@Results这个注解，所有的字段都要自己手动完成字段到类属性名的映射，即使名称一致*/
     @Results(
             {
                     @Result(column = "id",property = "id"),
@@ -31,7 +31,7 @@ public interface UserMapper extends BaseMapper<User> {
                     @Result(column = "password",property = "password"),
                     @Result(column = "birthday",property = "birthday"),
                     @Result(column = "id",property = "orders",javaType = List.class,
-                            many = @Many(select = "company.name.projectname.mapper.OrderMapper.selectByUid"))
+                            many = @Many(select = "cn.edu.gzist.cs.demo.devenv.mapper.OrderMapper.selectByUid"))
             }
     )
     List<User> selectAllUserAndOrders();

@@ -25,7 +25,7 @@ public interface OrderMapper extends BaseMapper<Order> {
                     @Result(column = "total",property = "total"),
                     @Result(column = "uid",property = "uid"),
                     @Result(column = "uid",property = "user",javaType = User.class,
-                            one = @One(select = "company.name.projectname.mapper.UserMapper.selectById"))
+                            one = @One(select = "cn.edu.gzist.cs.demo.devenv.mapper.UserMapper.selectById"))
             }
     )
     List<Order> selectAllOrdersAndUser();
