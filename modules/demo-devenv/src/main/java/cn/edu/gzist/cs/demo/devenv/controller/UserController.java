@@ -8,7 +8,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,6 +66,22 @@ public class UserController {
         Map<String, Object> result = new HashMap<>();
         try {
             List<User> users = userMapper.selectList(null);
+            result.put("success", true);
+            result.put("data", users);
+            result.put("total", users.size());
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("message", "查询用户列表时发生错误: " + e.getMessage());
+        }
+        return result;
+    }
+
+    // 查询所有用户
+    @GetMapping(value = "/andorders")
+    public Map<String, Object> getAllUsersAndOrders() {
+        Map<String, Object> result = new HashMap<>();
+        try {
+            List<User> users = userMapper.selectAllUserAndOrders();
             result.put("success", true);
             result.put("data", users);
             result.put("total", users.size());

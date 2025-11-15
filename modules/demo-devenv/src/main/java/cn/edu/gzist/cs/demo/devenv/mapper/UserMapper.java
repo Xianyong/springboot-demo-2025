@@ -7,11 +7,7 @@ import org.apache.ibatis.annotations.*;
 import java.util.List;
 
 /**
- * @author VVulpes
- * @CreateDate 2024/1/4
- * @ProjectDetails [P6·MybatisPlus]
  */
-
 /*接口的名称通常以表名+Mapper命名*/
 
 @Mapper
@@ -37,8 +33,7 @@ public interface UserMapper extends BaseMapper<User> {
     List<User> selectAllUserAndOrders();
 
     /*↓这些语句也可以都不写，只需要继承一个BaseMapper<实体类>↑，告知其需要操作哪个实体，MybatisPlus会自动根据该实体类找到对应的表，写好增删改查，但前提是类名要与表名保持一致*/
-//  查询所有用户
-
+    //  查询所有用户
     @Select("Select * from t_user")
     public List<User> find();
 
